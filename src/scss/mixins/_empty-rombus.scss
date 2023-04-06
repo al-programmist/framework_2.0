@@ -1,0 +1,20 @@
+//Создает круг
+@charset "UTF-8";
+
+@mixin empty-rombus($size:100px, $line: 10px) {
+  width: $size;
+  height: $size;
+  display: inline-block;
+  clip-path: polygon(
+                  0 calc($size / 2),
+                  calc($size / 2) 0,
+                  100% calc($size / 2),
+                  calc($size / 2) 100%,
+                  0 calc($size / 2),
+                  $line calc($size / 2),
+                  calc($size / 2) calc(100% - $line),
+                  calc(100% - $line) calc($size / 2),
+                  calc($size / 2) $line,
+                  $line calc($size / 2)
+  );
+}

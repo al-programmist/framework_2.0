@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+$z-index-modals: 100000;
+$modal-layout-bg-color: rgba(255, 255, 255, .1);
+$modal-bg-color: #fff;
+$modal-box-shadow: 0px 0px 10px 4px rgba(34, 60, 80, 0.2);
+$modal-padding: 40px;
+
+$modal-button-size: $modal-padding;
+$modal-border-color: #d0d0d0;
+$modal-border-width: 2px;
+$modal-border-style: solid;
+$modal-background-color: #eeeeee;
+
+.modals-open {
+  overflow: hidden;
+
+  .page-inner {
+    height: 100vh;
+    filter: blur(2px);
+    overflow: inherit;
+  }
+
+  .modals {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-modals;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    clip-path: unset;
+    clip: initial;
+    white-space: initial;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .2s ease-in-out;
+
+    @include after{
+      content: "";
+      display: block;
+      width: inherit;
+      height: inherit;
+      background-color: $modal-layout-bg-color;
+
+      transition: inherit;
+    };
+  }
+}
+
+.modal {
+  position: absolute;
+  @include center(both);
+  display: block;
+  padding: $modal-padding;
+  box-shadow: $modal-box-shadow;
+  background-color: #fff;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: $modal-button-size;
+    aspect-ratio: 1;
+    border-color: $modal-border-color;
+    border-width: $modal-border-width;
+    border-style: $modal-border-style;
+    background-color: $modal-background-color;
+  }
+}
+
