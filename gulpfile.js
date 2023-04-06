@@ -16,8 +16,7 @@ import webp from "gulp-webp";
 import fs from "fs";
 import ttf2woff from "gulp-ttf2woff";
 import ttf2woff2 from "gulp-ttf2woff2";
-import {deleteAsync, deleteSync} from 'del';
-import panini from "panini";
+import {deleteAsync} from 'del';
 import realFavicon from "gulp-real-favicon";
 import browserSync from "browser-sync";
 import bemValidator from "gulp-html-bem-validator";
@@ -28,7 +27,8 @@ import image from 'gulp-image';
 import picture from 'gulp-picture';
 import responsive from 'gulp-responsive';
 import notifier from 'gulp-notify';
-
+import svgSprite from 'gulp-svg-sprite';
+import pug from 'gulp-pug';
 
 const {src, dest} = gulp;
 const sass = gulpSass(dartSass);
@@ -47,17 +47,19 @@ const path = {
     js: buildPath + "js/",
     images: buildPath + "images/",
     icons: buildPath + "icon/",
+    svg: buildPath,
     favicons: buildPath + "favicon/",
     fonts: buildPath + "fonts/",
     htaccess: buildPath,
   },
 
   src: {
-    html: srcPath + "*.html",
+    html: [srcPath + "/pages/*.pug", srcPath + "*.pug", ],
     css: srcPath + "scss/*.scss",
     js: srcPath + "js/*.js",
     images: srcPath + "images/**/*",
     icons: srcPath + "icon/**/*",
+    svg: srcPath + "icon/**/*.svg",
     favicons: srcPath + "favicon/favicon-master.png",
     favcache: srcPath + "favicon/gen/",
     fonts: srcPath + "fonts/*",
@@ -65,11 +67,12 @@ const path = {
   },
 
   watch: {
-    html: srcPath + "**/*.html",
+    html: srcPath + "**/*.pug",
     css: srcPath + "scss/**/*.scss",
     js: srcPath + "js/**/*.js",
     images: srcPath + "images/**/*",
     icons: srcPath + "icon/**/*",
+    svg: srcPath + "icon/**/*",
     fonts: srcPath + "fonts/**/*",
     htaccess: srcPath + ".htaccess",
   },
@@ -173,6 +176,7 @@ const lookup = () => {
   gulp.watch([path.watch.js], {usePolling: true}, js);
   gulp.watch([path.watch.images], images);
   gulp.watch([path.watch.icons], icons);
+  gulp.watch([path.watch.svg], sprites);
   gulp.watch([path.watch.fonts], font);
   gulp.watch([path.watch.htaccess], {usePolling: true}, htaccess);
 }
@@ -180,7 +184,7 @@ const lookup = () => {
 // Inject the favicon markups in your HTML pages. You should run
 // this task whenever you modify a page. You can keep this task
 // as is or refactor your existing HTML pipeline.
-export const favinjectmarkups = (done) => {
+export const favinjectmarkups = () => {
   return src(path.build.html + "*.html", {base: buildPath})
           .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
           .pipe(dest(path.build.html));
@@ -249,15 +253,9 @@ export const favgenerate = (done) => {
 }
 
 export const html = () => {
-  panini.refresh();
   return src(path.src.html, {base: srcPath})
           .pipe(plumber())
-          .pipe(panini({
-            root: srcPath,
-            layouts: srcPath + "tpl/layouts/",
-            partials: srcPath + "tpl/partials/",
-            data: srcPath + "tpl/data/"
-          }))
+          .pipe(pug({pretty: true}))
           .pipe(picture({
             webp: true,
             breakpoints
@@ -279,10 +277,10 @@ export const css = () => {
             outputStyle: "expanded",
             includePaths: [__dirname + "/node_modules", __dirname + "/node_modules/gerillass/scss"]
           })
-          .on('error', notifier.onError({
-            message: "Error: <%= error.message %>",
-            title: "Style Error"
-          })))
+                  .on('error', notifier.onError({
+                    message: "Error: <%= error.message %>",
+                    title: "Style Error"
+                  })))
           .pipe(autoprefixer())
           .pipe(cssBeautify({
             autosemicolon: true
@@ -435,10 +433,86 @@ export const icons = () => {
           .pipe(browserSync.stream())
 }
 
+export const sprites = () => {
+    let config = {
+      shape: {
+        dimension: {
+          maxWidth: 500,
+          maxHeight: 500
+        },
+        spacing: {
+          padding: 0
+        },
+        transform: [{
+          "svgo": {
+            "plugins": [
+              {
+                name: "removeViewBox",
+                active: false,
+              },
+              {
+                name: "removeUnusedNS",
+                active: false,
+              },
+              {
+                name: "removeUselessStrokeAndFill",
+                active: true,
+              },
+              {
+                name: "cleanupIDs",
+                active: false,
+              },
+              {
+                name: "removeComments",
+                active: true,
+              },
+              {
+                name: "removeEmptyAttrs",
+                active: true,
+              },
+              {
+                name: "removeEmptyText",
+                active: true,
+              },
+              {
+                name: "collapseGroups",
+                active: true,
+              },
+              {
+                name: "collapseGroups",
+                active: true,
+              },
+              { name: "removeAttrs",
+                params : {attrs: '(fill|stroke|style)'}
+              }
+            ]
+          }
+        }]
+      },
+      mode: {
+        symbol: {
+          dest: '.',
+          sprite: 'sprite.svg'
+        }
+      }
+    };
+
+    return src(path.src.svg, {base: srcPath + "/icon/"})
+            .pipe(plumber())
+            .pipe(svgSprite(config))
+            .on('error', notifier.onError({
+              message: "Error: <%= error.message %>",
+              title: "Spite creation error"
+            }))
+            .pipe(dest(path.build.svg))
+            .pipe(browserSync.stream())
+}
+
 const build = gulp.series(
         clean,
         images,
         icons,
+        sprites,
         gulp.parallel(
                 html,
                 css,
