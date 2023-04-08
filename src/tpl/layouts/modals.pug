@@ -1,0 +1,27 @@
+block modal_vars
+  - aria_label = "alert"
+  - aria_modal = "true"
+  - aria_disabled = "true"
+  - aria_hidden = "false"
+  - role = "dialog"
+
+.modals(role="region" aria-label="modal-section" aria-hidden="true")
+  .modals__window.modal(
+  role= #{role}
+  aria-modal= #{aria_modal}
+  aria-disabled= #{aria_disabled}
+  aria-hidden= #{aria_hidden}
+  aria-label= #{aria_label}
+  hidden
+  )
+    .modal__title
+      block modal_title
+        | Заголовок окна по умолчанию
+    button.modal__close(
+    type="button"
+    aria-label="Закрыть"
+    )
+
+    .modal__body
+      block modal_body
+        | Контент окна по умолчанию
