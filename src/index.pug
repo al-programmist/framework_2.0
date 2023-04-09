@@ -1,13 +1,10 @@
 extends tpl/layouts/default.pug
 append variables
- - title = 'Главная страница сайта'
- - description = 'Главная страница на сайте описание'
- - meta.description = 'Вот тут главная страница'
- - meta.keywords = ['список', 'ключевых', 'слов', 'главной', 'страницы']
- - body.classList = ['index']
+  - title = 'Главная страница сайта'
+  - description = 'Главная страница на сайте описание'
+  - meta.description = 'Вот тут главная страница'
+  - meta.keywords = ['список', 'ключевых', 'слов', 'главной', 'страницы']
+  - body.classList = ['index']
 
 block main
   main.main
-    +svg('icon', 'youtube')
-
-

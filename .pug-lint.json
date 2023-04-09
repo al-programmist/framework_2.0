@@ -1,0 +1,20 @@
+{
+  "disallowDuplicateAttributes": true,
+  "disallowHtmlText": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowSpacesInsideAttributeBrackets": true,
+  "disallowSpecificTags": ["b", "i", "u"],
+  "disallowTrailingSpaces": true,
+  "requireClassLiteralsBeforeAttributes": true,
+  "requireClassLiteralsBeforeIdLiterals": true,
+  "requireLineFeedAtFileEnd": true,
+  "requireLowerCaseAttributes": true,
+  "requireLowerCaseTags": true,
+  "requireSpaceAfterCodeOperator": true,
+  "requireSpecificAttributes": [ {
+    "img": [ "alt" ],
+    "a": ["title"]
+  } ],
+  "validateDivTags": true,
+  "validateIndentation": 2
+}

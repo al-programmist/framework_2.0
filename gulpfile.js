@@ -29,6 +29,10 @@ import responsive from 'gulp-responsive';
 import notifier from 'gulp-notify';
 import svgSprite from 'gulp-svg-sprite';
 import pug from 'gulp-pug';
+import htmlhint from 'gulp-htmlhint';
+import reporter from 'gulp-reporter'
+import pugLinter from 'gulp-pug-linter'
+import pugLintStylish from 'puglint-stylish'
 
 const {src, dest} = gulp;
 const sass = gulpSass(dartSass);
@@ -54,7 +58,7 @@ const path = {
   },
 
   src: {
-    html: [srcPath + "/pages/*.pug", srcPath + "*.pug", ],
+    html: [srcPath + "pages/*.pug", srcPath + "*.pug",],
     css: srcPath + "scss/*.scss",
     js: srcPath + "js/*.js",
     images: srcPath + "images/**/*",
@@ -78,7 +82,7 @@ const path = {
   },
 
   clean: buildPath,
-}
+};
 
 const breakpoints = [
   {
@@ -137,14 +141,14 @@ const serve = () => {
 
 const htaccess = () => {
   return src(path.src.htaccess, {base: srcPath + "/"})
-          .pipe(dest(path.build.htaccess))
-          .pipe(browserSync.stream())
+    .pipe(dest(path.build.htaccess))
+    .pipe(browserSync.stream())
 }
 
 const favicon = () => {
   return src(path.src.favcache + "/*", {base: srcPath + "/favicon/gen/"})
-          .pipe(dest(path.build.favicons))
-          .pipe(browserSync.stream())
+    .pipe(dest(path.build.favicons))
+    .pipe(browserSync.stream())
 }
 
 /*Tasks*/
@@ -155,19 +159,19 @@ const clean = (done) => {
 
 const woff = () => {
   return src(path.src.fonts, {base: srcPath + "/fonts/"})
-          .pipe(ttf2woff())
-          .pipe(dest(path.build.fonts))
+    .pipe(ttf2woff())
+    .pipe(dest(path.build.fonts))
 }
 
 const woff2 = () => {
   return src(path.src.fonts, {base: srcPath + "/fonts/"})
-          .pipe(ttf2woff2())
-          .pipe(dest(path.build.fonts))
+    .pipe(ttf2woff2())
+    .pipe(dest(path.build.fonts))
 }
 
 const font = gulp.parallel(
-        woff,
-        woff2,
+  woff,
+  woff2,
 );
 
 const lookup = () => {
@@ -186,8 +190,8 @@ const lookup = () => {
 // as is or refactor your existing HTML pipeline.
 export const favinjectmarkups = () => {
   return src(path.build.html + "*.html", {base: buildPath})
-          .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
-          .pipe(dest(path.build.html));
+    .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
+    .pipe(dest(path.build.html));
 }
 
 // Check for updates on RealFaviconGenerator (think: Apple has just
@@ -195,7 +199,7 @@ export const favinjectmarkups = () => {
 // Run this task from time to time. Ideally, make it part of your
 // continuous integration system.
 export const favupdate = (done) => {
-  var currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
+  let currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
   realFavicon.checkForUpdates(currentVersion, function (err) {
     if (err) {
       throw err;
@@ -254,281 +258,287 @@ export const favgenerate = (done) => {
 
 export const html = () => {
   return src(path.src.html, {base: srcPath})
-          .pipe(plumber())
-          .pipe(pug({pretty: true}))
-          .pipe(picture({
-            webp: true,
-            breakpoints
-          }))
-          .pipe(bemValidator())
-          .pipe(htmlValidator.analyzer({ignoreLevel: 'info'}))
-          .pipe(htmlValidator.reporter())
-          .pipe(dest(path.build.html))
-          .pipe(browserSync.stream())
+    .pipe(plumber())
+    .pipe(pugLinter({
+      reporter: pugLintStylish,
+    }))
+    .pipe(pug({pretty: true}))
+    .pipe(picture({
+      webp: true,
+      breakpoints
+    }))
+    .pipe(htmlhint('.htmlhintrc'))
+    .pipe(reporter())
+    .pipe(htmlValidator.analyzer({ignoreLevel: 'info'}))
+    .pipe(htmlValidator.reporter())
+    .pipe(bemValidator())
+    .pipe(dest(path.build.html))
+    .pipe(browserSync.stream())
 }
 
 export const css = () => {
   return src(path.src.css, {base: srcPath + "/scss/"})
-          .pipe(sourcemaps.init())
-          .pipe(plumber())
-          .pipe(sass({
-            sourceMap: true,
-            errLogToConsole: true,
-            outputStyle: "expanded",
-            includePaths: [__dirname + "/node_modules", __dirname + "/node_modules/gerillass/scss"]
-          })
-                  .on('error', notifier.onError({
-                    message: "Error: <%= error.message %>",
-                    title: "Style Error"
-                  })))
-          .pipe(autoprefixer())
-          .pipe(cssBeautify({
-            autosemicolon: true
-          }))
-          .pipe(dest(path.build.css))
-          .pipe(cssnano({
-            zIndex: false,
-            discardComments: {
-              removeAll: true
-            }
-          }))
-          .pipe(stripComments())
-          .pipe(rename({
-            suffix: ".min",
-            extname: ".css"
-          }))
-          .pipe(sourcemaps.write())
-          .pipe(dest(path.build.css))
-          .pipe(browserSync.stream())
+    .pipe(sourcemaps.init())
+    .pipe(plumber())
+    .pipe(sass({
+      sourceMap: true,
+      errLogToConsole: true,
+      outputStyle: "expanded",
+      includePaths: [__dirname + "/node_modules", __dirname + "/node_modules/gerillass/scss"]
+    })
+      .on('error', notifier.onError({
+        message: "Error: <%= error.message %>",
+        title: "Style Error"
+      })))
+    .pipe(autoprefixer())
+    .pipe(cssBeautify({
+      autosemicolon: true
+    }))
+    .pipe(dest(path.build.css))
+    .pipe(cssnano({
+      zIndex: false,
+      discardComments: {
+        removeAll: true
+      }
+    }))
+    .pipe(stripComments())
+    .pipe(rename({
+      suffix: ".min",
+      extname: ".css"
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(dest(path.build.css))
+    .pipe(browserSync.stream())
 }
 
 export const js = () => {
   return src(path.src.js, {base: srcPath + "js/"})
-          .pipe(sourcemaps.init())
-          .pipe(plumber())
-          .pipe(rigger())
-          .pipe(dest(path.build.js))
-          .pipe(uglify())
-          .pipe(rename({
-            suffix: ".min",
-            extname: ".js"
-          }))
-          .pipe(sourcemaps.write())
-          .pipe(dest(path.build.js))
-          .pipe(browserSync.stream())
+    .pipe(sourcemaps.init())
+    .pipe(plumber())
+    .pipe(rigger())
+    .pipe(dest(path.build.js))
+    .pipe(uglify())
+    .pipe(rename({
+      suffix: ".min",
+      extname: ".js"
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(dest(path.build.js))
+    .pipe(browserSync.stream())
 }
 
 
 export const images = () => {
   return src(path.src.images, {base: srcPath + "/images/"})
-          .pipe(
-                  responsive({
-                    '*.svg': [],
-                    '**/*.jpg': [
-                      {
-                        width: breakpoints[0].width,
-                        rename: {suffix: breakpoints[0].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[1].width,
-                        rename: {suffix: breakpoints[1].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[2].width,
-                        rename: {suffix: breakpoints[2].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[3].width,
-                        rename: {suffix: breakpoints[3].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[4].width,
-                        rename: {suffix: breakpoints[4].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[5].width,
-                        rename: {suffix: breakpoints[5].rename.suffix}
-                      },
-                      {
-                        // Compress, strip metadata, and rename original image
-                        rename: {suffix: '-original'}
-                      }
-                    ],
-                    // Resize all PNG images to be retina ready
-                    '**/*.png': [
-                      {
-                        width: breakpoints[0].width,
-                        rename: {suffix: breakpoints[0].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[1].width,
-                        rename: {suffix: breakpoints[1].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[2].width,
-                        rename: {suffix: breakpoints[2].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[3].width,
-                        rename: {suffix: breakpoints[3].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[4].width,
-                        rename: {suffix: breakpoints[4].rename.suffix}
-                      },
-                      {
-                        width: breakpoints[5].width,
-                        rename: {suffix: breakpoints[5].rename.suffix}
-                      },
-                      {
-                        // Compress, strip metadata, and rename original image
-                        rename: {suffix: '-original'}
-                      }
+    .pipe(
+      responsive({
+        '*.svg': [],
+        '**/*.jpg': [
+          {
+            width: breakpoints[0].width,
+            rename: {suffix: breakpoints[0].rename.suffix}
+          },
+          {
+            width: breakpoints[1].width,
+            rename: {suffix: breakpoints[1].rename.suffix}
+          },
+          {
+            width: breakpoints[2].width,
+            rename: {suffix: breakpoints[2].rename.suffix}
+          },
+          {
+            width: breakpoints[3].width,
+            rename: {suffix: breakpoints[3].rename.suffix}
+          },
+          {
+            width: breakpoints[4].width,
+            rename: {suffix: breakpoints[4].rename.suffix}
+          },
+          {
+            width: breakpoints[5].width,
+            rename: {suffix: breakpoints[5].rename.suffix}
+          },
+          {
+            // Compress, strip metadata, and rename original image
+            rename: {suffix: '-original'}
+          }
+        ],
+        // Resize all PNG images to be retina ready
+        '**/*.png': [
+          {
+            width: breakpoints[0].width,
+            rename: {suffix: breakpoints[0].rename.suffix}
+          },
+          {
+            width: breakpoints[1].width,
+            rename: {suffix: breakpoints[1].rename.suffix}
+          },
+          {
+            width: breakpoints[2].width,
+            rename: {suffix: breakpoints[2].rename.suffix}
+          },
+          {
+            width: breakpoints[3].width,
+            rename: {suffix: breakpoints[3].rename.suffix}
+          },
+          {
+            width: breakpoints[4].width,
+            rename: {suffix: breakpoints[4].rename.suffix}
+          },
+          {
+            width: breakpoints[5].width,
+            rename: {suffix: breakpoints[5].rename.suffix}
+          },
+          {
+            // Compress, strip metadata, and rename original image
+            rename: {suffix: '-original'}
+          }
 
-                    ]
-                  }, {
-                    quality: 100,
-                    // Use progressive (interlace) scan for JPEG and PNG output
-                    progressive: true,
-                    errorOnUnusedConfig: false,
-                    errorOnUnusedImage: false,
-                    errorOnEnlargement: false,
-                    // Strip all metadata
-                    withMetadata: false
-                  })
-          )
-          .pipe(image({
-            pngquant: true,
-            optipng: false,
-            zopflipng: true,
-            jpegRecompress: false,
-            mozjpeg: true,
-            gifsicle: true,
-            svgo: true,
-            concurrent: 10,
-            quiet: false // defaults to false
-          }))
-          .pipe(dest(path.build.images))
-          .pipe(webp())
-          .pipe(dest(path.build.images))
-          .pipe(browserSync.stream())
+        ]
+      }, {
+        quality: 100,
+        // Use progressive (interlace) scan for JPEG and PNG output
+        progressive: true,
+        errorOnUnusedConfig: false,
+        errorOnUnusedImage: false,
+        errorOnEnlargement: false,
+        // Strip all metadata
+        withMetadata: false
+      })
+    )
+    .pipe(image({
+      pngquant: true,
+      optipng: false,
+      zopflipng: true,
+      jpegRecompress: false,
+      mozjpeg: true,
+      gifsicle: true,
+      svgo: true,
+      concurrent: 10,
+      quiet: false // defaults to false
+    }))
+    .pipe(dest(path.build.images))
+    .pipe(webp())
+    .pipe(dest(path.build.images))
+    .pipe(browserSync.stream())
 }
 
 export const icons = () => {
   return src(path.src.icons, {base: srcPath + "/icon/"})
-          .pipe(image({
-            pngquant: true,
-            optipng: false,
-            zopflipng: true,
-            jpegRecompress: false,
-            mozjpeg: true,
-            gifsicle: true,
-            svgo: true,
-            concurrent: 10,
-            quiet: false // defaults to false
-          }))
-          .pipe(dest(path.build.icons))
-          .pipe(webp())
-          .pipe(dest(path.build.icons))
-          .pipe(browserSync.stream())
+    .pipe(image({
+      pngquant: true,
+      optipng: false,
+      zopflipng: true,
+      jpegRecompress: false,
+      mozjpeg: true,
+      gifsicle: true,
+      svgo: true,
+      concurrent: 10,
+      quiet: false // defaults to false
+    }))
+    .pipe(dest(path.build.icons))
+    .pipe(webp())
+    .pipe(dest(path.build.icons))
+    .pipe(browserSync.stream())
 }
 
 export const sprites = () => {
-    let config = {
-      shape: {
-        dimension: {
-          maxWidth: 500,
-          maxHeight: 500
-        },
-        spacing: {
-          padding: 0
-        },
-        transform: [{
-          "svgo": {
-            "plugins": [
-              {
-                name: "removeViewBox",
-                active: false,
-              },
-              {
-                name: "removeUnusedNS",
-                active: false,
-              },
-              {
-                name: "removeUselessStrokeAndFill",
-                active: true,
-              },
-              {
-                name: "cleanupIDs",
-                active: false,
-              },
-              {
-                name: "removeComments",
-                active: true,
-              },
-              {
-                name: "removeEmptyAttrs",
-                active: true,
-              },
-              {
-                name: "removeEmptyText",
-                active: true,
-              },
-              {
-                name: "collapseGroups",
-                active: true,
-              },
-              {
-                name: "collapseGroups",
-                active: true,
-              },
-              { name: "removeAttrs",
-                params : {attrs: '(fill|stroke|style)'}
-              }
-            ]
-          }
-        }]
+  let config = {
+    shape: {
+      dimension: {
+        maxWidth: 500,
+        maxHeight: 500
       },
-      mode: {
-        symbol: {
-          dest: '.',
-          sprite: 'sprite.svg'
+      spacing: {
+        padding: 0
+      },
+      transform: [{
+        "svgo": {
+          "plugins": [
+            {
+              name: "removeViewBox",
+              active: false,
+            },
+            {
+              name: "removeUnusedNS",
+              active: false,
+            },
+            {
+              name: "removeUselessStrokeAndFill",
+              active: true,
+            },
+            {
+              name: "cleanupIDs",
+              active: false,
+            },
+            {
+              name: "removeComments",
+              active: true,
+            },
+            {
+              name: "removeEmptyAttrs",
+              active: true,
+            },
+            {
+              name: "removeEmptyText",
+              active: true,
+            },
+            {
+              name: "collapseGroups",
+              active: true,
+            },
+            {
+              name: "collapseGroups",
+              active: true,
+            },
+            {
+              name: "removeAttrs",
+              params: {attrs: '(fill|stroke|style)'}
+            }
+          ]
         }
+      }]
+    },
+    mode: {
+      symbol: {
+        dest: '.',
+        sprite: 'sprite.svg'
       }
-    };
+    }
+  };
 
-    return src(path.src.svg, {base: srcPath + "/icon/"})
-            .pipe(plumber())
-            .pipe(svgSprite(config))
-            .on('error', notifier.onError({
-              message: "Error: <%= error.message %>",
-              title: "Spite creation error"
-            }))
-            .pipe(dest(path.build.svg))
-            .pipe(browserSync.stream())
+  return src(path.src.svg, {base: srcPath + "/icon/"})
+    .pipe(plumber())
+    .pipe(svgSprite(config))
+    .on('error', notifier.onError({
+      message: "Error: <%= error.message %>",
+      title: "Spite creation error"
+    }))
+    .pipe(dest(path.build.svg))
+    .pipe(browserSync.stream())
 }
 
 const build = gulp.series(
-        clean,
-        images,
-        icons,
-        sprites,
-        gulp.parallel(
-                html,
-                css,
-                js,
-                htaccess,
-                favicon,
-                font,
-        )
+  clean,
+  images,
+  icons,
+  sprites,
+  gulp.parallel(
+    html,
+    css,
+    js,
+    htaccess,
+    favicon,
+    font,
+  )
 );
 
 export default gulp.series(
-        build,
-        gulp.parallel(
-                serve,
-                lookup
-        )
+  build,
+  gulp.parallel(
+    serve,
+    lookup
+  )
 );
 
 
