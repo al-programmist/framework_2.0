@@ -1,11 +1,12 @@
 @charset "UTF-8";
+
 @mixin photo-border($line: 10px) {
-  display: inline-block;
-  clip-path: polygon(
-                  0 0, 100% 0,
-                  100% 100%, 0 100%, 0 0,
-                  $line $line, $line calc(100% - $line),
-                  calc(100% - $line) calc(100% - $line),
-                  calc(100% - $line) $line, $line $line
-  );
+	display: inline-block;
+	clip-path: polygon(
+			0 0, 100% 0,
+			100% 100%, 0 100%, 0 0,
+			$line $line, $line calc(100% - $line),
+			calc(100% - $line) calc(100% - $line),
+			calc(100% - $line) $line, $line $line
+	);
 }

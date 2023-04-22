@@ -1,17 +1,18 @@
 @charset "UTF-8";
+
 @mixin after($content: null) {
-  &::after {
-    @if $content == null {
-      @content;
-    } @else if $content != null {
-      $data: str-slice($content, 1, 5);
-      @if $data == "data-" {
-        content: attr(#{$content});
-        @content;
-      } @else {
-        content: "#{$content}";
-        @content;
-      }
-    }
-  }
+	&::after {
+		@if $content == null {
+			@content;
+		} @else if $content != null {
+			$data: str-slice($content, 1, 5);
+			@if $data == "data-" {
+				content: attr(#{$content});
+				@content;
+			} @else {
+				content: "#{$content}";
+				@content;
+			}
+		}
+	}
 }

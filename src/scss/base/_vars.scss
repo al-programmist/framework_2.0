@@ -30,24 +30,21 @@ $base-lh: 1.4;
 $base-header-fw: 500;
 $base-header-lh: 1.2;
 
-$site-default-font: 'Montserrat';
-$font-family-sans-serif:
-  // Safari for macOS and iOS (San Francisco)
-        -apple-system,
-          // Chrome < 56 for macOS (San Francisco)
-        "BlinkMacSystemFont",
-          // Windows
-        "Segoe UI",
-          // Android
-        "Roboto",
-          // Basic web fallback
-        "Helvetica Neue", Arial,
-          // Linux
-        "Noto Sans",
-          // Sans serif fallback
-        sans-serif,
-          // Emoji fonts
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$site-default-font: "Montserrat";
+$font-family-sans-serif: // Safari for macOS and iOS (San Francisco)
+	// Chrome < 56 for macOS (San Francisco)
+	"BlinkMacSystemFont",
+	"Segoe UI",
+	"Roboto",
+	"Helvetica Neue",
+	"Noto Sans",
+	"Apple Color Emoji",
+	"Segoe UI Emoji",
+	"Segoe UI Symbol",
+	"Noto Color Emoji",
+	-apple-system,
+	arial,
+	sans-serif;
 
 $padding-for-navigation: 0;
 $pt-section: 30px;
