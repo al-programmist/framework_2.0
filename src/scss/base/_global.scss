@@ -149,12 +149,12 @@ sup,
 
 sub,
 .sub {
-	bottom: -0.25rem;
+	bottom: -.25rem;
 }
 
 sup,
 .sup {
-	top: -0.5rem;
+	top: -.5rem;
 }
 
 table {
@@ -175,7 +175,7 @@ caption {
 
 label {
 	display: inline-block;
-	margin-bottom: 0.5rem;
+	margin-bottom: .5rem;
 }
 
 button,
@@ -323,7 +323,7 @@ dt {
 }
 
 dd {
-	margin-bottom: 0.5rem;
+	margin-bottom: .5rem;
 	margin-left: 0;
 }
 
@@ -342,8 +342,8 @@ a > code {
 }
 
 kbd {
-	border-radius: 0.2rem;
-	padding: 0.2rem 0.4rem;
+	border-radius: .2rem;
+	padding: .2rem .4rem;
 	font-size: 87.5%;
 	color: $kbd-color;
 	background-color: $kbd-bg-color;
@@ -394,7 +394,7 @@ nav,
 
 mark,
 .mark {
-	padding: 0.2em;
+	padding: .2em;
 	background-color: $mark-bg-color;
 }
 
@@ -619,7 +619,7 @@ h6,
 
 .section,
 section {
-	padding-top: $pt-section; //Отступы между секциями
+	padding-top: $pt-section; // Отступы между секциями
 	padding-bottom: $pb-section;
 	position: relative;
 	margin-top: 0;

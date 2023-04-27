@@ -33,10 +33,6 @@ import htmlhint from 'gulp-htmlhint';
 import reporter from 'gulp-reporter'
 import pugLinter from 'gulp-pug-linter'
 import pugLintStylish from 'puglint-stylish'
-import postcss from 'gulp-postcss'
-import lintreport from 'postcss-reporter'
-import stylelint from 'stylelint'
-import scssSyntax from 'postcss-scss'
 
 const {src, dest} = gulp;
 const sass = gulpSass(dartSass);
@@ -278,17 +274,6 @@ export const html = () => {
     .pipe(bemValidator())
     .pipe(dest(path.build.html))
     .pipe(browserSync.stream())
-}
-
-export const lint = () => {
-  return src(srcPath + '**/*.scss', {base: srcPath + "/scss/"})
-    .pipe(postcss([
-      stylelint(),
-      lintreport({clearMessages: true})
-    ],
-      {
-        syntax: scssSyntax
-      }));
 }
 
 export const css = () => {
