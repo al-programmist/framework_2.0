@@ -3,7 +3,7 @@
 $z-index-modals: 100000;
 $modal-layout-bg-color: rgba(255, 255, 255, .1);
 $modal-bg-color: #fff;
-$modal-box-shadow: 0 0 10px 4px rgba(34, 60, 80, 0.2);
+$modal-box-shadow: 0 0 10px 4px rgba(34, 60, 80, .2);
 $modal-padding: 40px;
 $modal-button-size: $modal-padding;
 $modal-border-color: #d0d0d0;
@@ -58,7 +58,7 @@ $modal-background-color: #eee;
 	box-shadow: $modal-box-shadow;
 	background-color: #fff;
 
-	@include center(both);
+	@include center("both");
 
 	&__close {
 		position: absolute;

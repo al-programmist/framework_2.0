@@ -4,7 +4,8 @@
   "author": "Alexander Guzyaev",
   "type": "module",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "linter": "stylelint src/scss/**/*.scss --quiet-deprecation-warnings"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -45,18 +46,16 @@
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
     "postcss-preset-env": "^8.3.0",
-    "postcss-reporter": "^7.0.5",
     "postcss-scss": "^4.0.6",
     "pug": "^3.0.2",
     "pug-lint": "^2.7.0",
     "puglint-stylish": "^1.1.0",
     "sass": "^1.59.3",
-    "stylelint": "^15.4.0",
-    "stylelint-config-standard-scss": "^8.0.0",
+    "stylelint": "^15.6.0",
+    "stylelint-scss": "^4.6.0",
     "url": "^0.11.0"
   },
   "dependencies": {
-    "bootstrap-4-grid": "^3.4.0",
-    "swiper": "^9.2.0"
+    "bootstrap-4-grid": "^3.4.0"
   }
 }

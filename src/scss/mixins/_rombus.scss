@@ -1,15 +1,18 @@
-//Создает ромб. Обрезает фоновое изображение
 @charset "UTF-8";
 
 @mixin rombus($size:100px) {
 	width: $size;
 	height: $size;
 	display: inline-block;
-	clip-path: polygon(
-			0 calc($size / 2), calc($size / 2) 0,
-			calc(100% - ($size / 2)) 0,
-			100% calc($size / 2), 100% calc(100% - ($size / 2)),
-			calc(100% - ($size / 2)) 100%, calc($size / 2) 100%,
-			0 calc(100% - ($size / 2))
+	clip-path:
+		polygon(
+			0 50%,
+			50% 0,
+			50% 0,
+			100% 50%,
+			100% 50%,
+			50% 100%,
+			50% 100%,
+			0 50%
 	);
 }

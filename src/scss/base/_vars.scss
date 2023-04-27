@@ -3,9 +3,7 @@ $z-index-hidden: 999999999;
 $base-bg-color: #fff;
 $kbd-bg-color: #999;
 $mark-bg-color: #999;
-
 $picture-bg-color: #eee;
-
 $link-color: #2413a1;
 $base-color: #000;
 $selection-color: #888;
@@ -15,7 +13,6 @@ $caption-color: #000;
 $code-color: #005;
 $kbd-color: #222;
 $pre-color: #222;
-
 $h1-fz: 40px;
 $h2-fz: 32px;
 $h3-fz: 28px;
@@ -29,10 +26,8 @@ $base-code-fz: 16px;
 $base-lh: 1.4;
 $base-header-fw: 500;
 $base-header-lh: 1.2;
-
 $site-default-font: "Montserrat";
-$font-family-sans-serif: // Safari for macOS and iOS (San Francisco)
-	// Chrome < 56 for macOS (San Francisco)
+$font-family-sans-serif:
 	"BlinkMacSystemFont",
 	"Segoe UI",
 	"Roboto",
@@ -45,17 +40,13 @@ $font-family-sans-serif: // Safari for macOS and iOS (San Francisco)
 	-apple-system,
 	arial,
 	sans-serif;
-
 $padding-for-navigation: 0;
 $pt-section: 30px;
 $pb-section: 30px;
 $mb-p: 16px;
-
 $picture-bg-picture: "/icon/picture.svg";
 $picture-min-width: 320px;
 $picture-min-height: 320px;
 $picture-aspect-ratio: 1;
-
 $logo-width: 100px;
 $logo-height: 30px;
-
