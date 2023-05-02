@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "gulp",
-    "linter": "stylelint src/scss/**/*.scss --quiet-deprecation-warnings"
+    "stylelint": "stylelint src/scss/**/*.scss --quiet-deprecation-warnings"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
