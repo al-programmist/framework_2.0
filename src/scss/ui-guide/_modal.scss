@@ -22,13 +22,13 @@ $modal-background-color: #eee;
 
 	.modals {
 		position: fixed;
+		z-index: $z-index-modals;
 		top: 0;
 		bottom: 0;
 		left: 0;
 		right: 0;
-		z-index: $z-index-modals;
-		padding: 0;
 		margin: 0;
+		padding: 0;
 		display: block;
 		width: 100vw;
 		height: 100vh;
@@ -53,12 +53,10 @@ $modal-background-color: #eee;
 
 .modal {
 	position: absolute;
-	display: block;
 	padding: $modal-padding;
+	display: block;
 	box-shadow: $modal-box-shadow;
 	background-color: #fff;
-
-	@include center("both");
 
 	&__close {
 		position: absolute;
@@ -72,4 +70,6 @@ $modal-background-color: #eee;
 		border-style: $modal-border-style;
 		background-color: $modal-background-color;
 	}
+
+	@include center("both");
 }

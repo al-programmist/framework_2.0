@@ -61,10 +61,10 @@ hr {
 .visually-hidden:not(:focus):not(:active),
 [data-hidden],
 [hidden] {
-	padding: 0;
-	margin: -1px;
 	position: absolute;
 	z-index: -$z-index-hidden;
+	margin: -1px;
+	padding: 0;
 	width: 1px;
 	height: 1px;
 	-webkit-clip-path: inset(100%);
@@ -78,8 +78,8 @@ hr {
 }
 
 p {
-	padding: 0;
 	margin: 0;
+	padding: 0;
 	font-size: inherit;
 
 	&:not(:last-child) {
@@ -99,8 +99,6 @@ abbr[title],
 abbr[data-original-title] {
 	border-bottom: 0;
 	text-decoration: underline dotted;
-	-webkit-text-decoration-style: dotted;
-	-webkit-text-decoration-line: underline;
 	-webkit-text-decoration-skip-ink: none;
 	text-decoration-skip-ink: none;
 	cursor: help;
@@ -166,16 +164,16 @@ th {
 }
 
 caption {
-	caption-side: bottom;
 	padding-top: 12px;
 	padding-bottom: 12px;
-	text-align: left;
+	caption-side: bottom;
 	color: $caption-color;
+	text-align: left;
 }
 
 label {
-	display: inline-block;
 	margin-bottom: .5rem;
+	display: inline-block;
 }
 
 button,
@@ -203,13 +201,6 @@ select {
 	word-wrap: normal;
 }
 
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-	-webkit-appearance: button;
-}
-
 button:not(:disabled),
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -234,16 +225,9 @@ button:-moz-focusring,
 
 input[type="radio"],
 input[type="checkbox"] {
-	padding: 0;
 	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
-}
-
-input[type="date"],
-input[type="time"],
-input[type="datetime-local"],
-input[type="month"] {
-	-webkit-appearance: listbox;
 }
 
 textarea {
@@ -253,21 +237,21 @@ textarea {
 
 fieldset {
 	margin: 0;
-	border: 0;
 	padding: 0;
+	border: 0;
 	min-width: 0;
 }
 
 legend {
-	display: block;
 	margin-bottom: 8px;
 	padding: 0;
-	width: 100%;
+	display: block;
 	max-width: 100%;
+	width: 100%;
+	color: inherit;
 	font-size: 1.5rem;
 	line-height: inherit;
 	white-space: normal;
-	color: inherit;
 }
 
 progress {
@@ -280,7 +264,6 @@ progress {
 }
 
 [type="search"] {
-	-webkit-appearance: none;
 	outline-offset: -2px;
 }
 
@@ -388,8 +371,8 @@ nav,
 .main,
 .nav,
 .section {
-	display: block;
 	margin: 0;
+	display: block;
 }
 
 mark,
@@ -483,11 +466,11 @@ a:visited {
 
 		&::after {
 			position: absolute;
+			z-index: 1;
 			top: 0;
-			right: 0;
 			bottom: 0;
 			left: 0;
-			z-index: 1;
+			right: 0;
 			content: "";
 			pointer-events: auto;
 			cursor: pointer;
@@ -539,8 +522,8 @@ h6,
 
 .fixed {
 	position: fixed;
-	top: 0;
 	z-index: $z-index-fixed;
+	top: 0;
 }
 
 @media print {
@@ -610,19 +593,19 @@ h6,
 .page-inner {
 	position: relative;
 	padding-top: $padding-for-navigation; /*Отступ для верхнего меню*/
-	overflow-x: inherit;
-	min-width: 100vw;
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	min-width: 100vw;
+	min-height: 100vh;
+	overflow-x: inherit;
 }
 
 .section,
 section {
-	padding-top: $pt-section; // Отступы между секциями
-	padding-bottom: $pb-section;
 	position: relative;
 	margin-top: 0;
+	padding-top: $pt-section; // Отступы между секциями
+	padding-bottom: $pb-section;
 }
 
 .header,
@@ -650,8 +633,8 @@ picture {
 	position: relative;
 	display: inline-block;
 	max-width: $picture-min-width;
-	aspect-ratio: $picture-aspect-ratio;
 	width: 100%;
+	aspect-ratio: $picture-aspect-ratio;
 	overflow: hidden;
 	background-size: 60px 60px;
 	background-repeat: no-repeat;

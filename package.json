@@ -52,6 +52,7 @@
     "puglint-stylish": "^1.1.0",
     "sass": "^1.59.3",
     "stylelint": "^15.6.0",
+    "stylelint-order": "^6.0.3",
     "stylelint-scss": "^4.6.0",
     "url": "^0.11.0"
   },
