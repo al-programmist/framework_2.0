@@ -4,9 +4,14 @@
   "author": "Alexander Guzyaev",
   "type": "module",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "linter": "stylelint src/scss/**/*.scss --quiet-deprecation-warnings"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.4",
     "browser-sync": "^2.28.3",
     "del": "^7.0.0",
     "fs": "^0.0.1-security",
@@ -20,6 +25,7 @@
     "gulp-notify": "^4.0.0",
     "gulp-picture": "^0.1.2",
     "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
     "gulp-pug": "^5.0.0",
     "gulp-pug-linter": "^1.5.0",
     "gulp-real-favicon": "^0.3.2",
@@ -37,14 +43,20 @@
     "gulp-w3c-html-validator": "^5.2.0",
     "gulp-webp": "^4.0.1",
     "path": "^0.12.7",
+    "postcss": "^8.4.21",
+    "postcss-import": "^15.1.0",
+    "postcss-preset-env": "^8.3.0",
+    "postcss-scss": "^4.0.6",
     "pug": "^3.0.2",
     "pug-lint": "^2.7.0",
     "puglint-stylish": "^1.1.0",
     "sass": "^1.59.3",
+    "stylelint": "^15.6.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-scss": "^4.6.0",
     "url": "^0.11.0"
   },
   "dependencies": {
-    "bootstrap-4-grid": "^3.4.0",
-    "swiper": "^9.2.0"
+    "bootstrap-4-grid": "^3.4.0"
   }
 }

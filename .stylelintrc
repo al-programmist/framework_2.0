@@ -1,0 +1,388 @@
+{
+	"customSyntax": "postcss-scss",
+	"plugins": [
+		"stylelint-scss",
+		"stylelint-order"
+	],
+  "rules": {
+		"order/order": [
+			"custom-properties",
+			"dollar-variables",
+			"declarations",
+			{
+				"type": "at-rule",
+				"name": "include",
+				"hasBlock": false
+			},
+			{
+				"type": "at-rule",
+				"name": "include",
+				"hasBlock": true
+			}
+		],
+		"order/properties-order": [
+			"position",
+			"z-index",
+			"top",
+			"bottom",
+			"left",
+			"right",
+			"margin",
+			"margin-top",
+			"margin-bottom",
+			"margin-left",
+			"margin-right",
+			"padding",
+			"padding-top",
+			"padding-bottom",
+			"padding-left",
+			"padding-right",
+			"display",
+			"max-width",
+			"max-height",
+			"min-width",
+			"min-height",
+			"width",
+			"height",
+			"aspect-ratio",
+			"box-sizing",
+			"font-family",
+			"font-size",
+			"font-style",
+			"line-height",
+			"color",
+			"letter-spacing",
+			"text-align",
+			"text-decoration",
+			"background",
+			"background-color",
+			"background-image",
+			"background-size",
+			"background-position",
+			"background-repeat",
+			"overflow",
+			"visibility",
+			"transform",
+			"transition",
+			"animation"
+		],
+
+		"declaration-block-trailing-semicolon": "always",
+		"declaration-colon-space-after": "always-single-line",
+		"declaration-colon-newline-after": "always-multi-line",
+		"declaration-colon-space-before": "never",
+		"scss/at-else-if-parentheses-space-before": "always",
+		"scss/at-function-parentheses-space-before": "never",
+		"scss/at-function-pattern": [
+			"^(-?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+			{
+				"message": "Expected function name to be kebab-case"
+			}
+		],
+		"scss/at-mixin-argumentless-call-parentheses": "never",
+		"scss/at-mixin-parentheses-space-before": "never",
+		"scss/at-mixin-pattern": [
+			"^(-?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+			{
+				"message": "Expected mixin name to be kebab-case"
+			}
+		],
+		"scss/dollar-variable-colon-space-after": "always-single-line",
+		"scss/dollar-variable-colon-space-before": "never",
+		"scss/dollar-variable-empty-line-before": [
+			"always",
+			{
+				"except": [
+					"after-dollar-variable",
+					"first-nested"
+				],
+				"ignore": [
+					"after-comment",
+					"inside-single-line-block"
+				]
+			}
+		],
+		"scss/no-duplicate-mixins": true,
+		"scss/at-rule-no-unknown": true,
+		"scss/selector-no-redundant-nesting-selector": true,
+		"declaration-block-semicolon-newline-after": "always-multi-line",
+		"declaration-block-semicolon-newline-before": "never-multi-line",
+		"declaration-block-semicolon-space-after": "always-single-line",
+		"declaration-block-semicolon-space-before": "never",
+		"declaration-block-single-line-max-declarations": 0,
+
+		"declaration-block-no-duplicate-properties": [
+			true,
+			{
+				"ignore": ["consecutive-duplicates-with-different-values"]
+			}
+		],
+		"scss/dollar-variable-pattern": [
+			"^(-?[a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+			{
+				"message": "Expected variable to be kebab-case"
+			}
+		],
+		"scss/double-slash-comment-empty-line-before": [
+			"always",
+			{
+				"except": ["first-nested"],
+				"ignore": ["between-comments", "stylelint-commands"]
+			}
+		],
+		"scss/at-import-no-partial-leading-underscore": true,
+		"scss/at-import-partial-extension": "never",
+		"declaration-bang-space-after": "never",
+		"declaration-bang-space-before": "always",
+		"scss/double-slash-comment-whitespace-inside": "always",
+		"scss/declaration-nested-properties-no-divided-groups": true,
+		"scss/dollar-variable-no-missing-interpolation": true,
+		"scss/function-quote-no-quoted-strings-inside": true,
+		"scss/function-unquote-no-unquoted-strings-inside": true,
+		"scss/operator-no-newline-after": true,
+		"scss/operator-no-newline-before": true,
+		"declaration-block-no-shorthand-property-overrides": true,
+		"declaration-no-important": true,
+		"font-family-no-duplicate-names": true,
+		"font-family-no-missing-generic-family-keyword": true,
+		"function-calc-no-unspaced-operator": true,
+		"function-linear-gradient-no-nonstandard-direction": true,
+		"function-no-unknown": [true, {
+			"ignoreFunctions": [
+				"str-slice",
+				"if",
+				"else",
+				"debug"
+			]
+		}],
+		"function-comma-newline-after": "always-multi-line",
+		"function-comma-newline-before": "never-multi-line",
+		"function-comma-space-after": "always-single-line",
+		"function-comma-space-before": "never",
+		"function-max-empty-lines": 0,
+		"max-empty-lines": 1,
+		"media-feature-colon-space-after": "always",
+		"media-feature-colon-space-before": "never",
+		"media-feature-name-case": "lower",
+
+		"keyframe-block-no-duplicate-selectors": true,
+		"keyframe-declaration-no-important": true,
+		"media-feature-name-no-unknown": true,
+		"named-grid-areas-no-invalid": true,
+		"no-descending-specificity": true,
+		"no-duplicate-at-import-rules": true,
+		"media-feature-parentheses-space-inside": "never",
+		"no-duplicate-selectors": true,
+		"no-eol-whitespace": true,
+		"no-extra-semicolons": true,
+		"no-invalid-double-slash-comments": true,
+		"number-max-precision": 5,
+		"number-no-trailing-zeros": true,
+		"number-leading-zero": "never",
+		"no-empty-source": [
+			true,
+			{
+				"severity": "warning"
+			}
+		],
+		"no-invalid-position-at-import-rule": true,
+		"no-irregular-whitespace": true,
+		"property-no-unknown": true,
+		"selector-anb-no-unmatchable": true,
+		"selector-pseudo-class-no-unknown": true,
+		"selector-pseudo-class-parentheses-space-inside": "never",
+		"selector-pseudo-element-no-unknown": true,
+		"selector-type-no-unknown": [
+			true,
+			{
+				"ignore": ["custom-elements"]
+			}
+		],
+		"string-no-newline": true,
+		"annotation-no-unknown": true,
+		"at-rule-no-unknown": [true, {
+			"ignoreAtRules" : [
+				"if",
+				"else",
+				"import",
+				"mixin",
+				"extend",
+				"debug",
+				"include"
+			]
+		}],
+		"block-no-empty": [
+			true,
+			{
+				"severity": "warning"
+			}
+		],
+		"block-opening-brace-newline-after": "always-multi-line",
+		"block-opening-brace-newline-before": "never-single-line",
+		"block-opening-brace-space-after": "always-single-line",
+		"block-opening-brace-space-before": "always",
+		"color-hex-case": "lower",
+		"color-no-invalid-hex": true,
+		"comment-no-empty": true,
+		"custom-property-no-missing-var-function": true,
+		"selector-attribute-brackets-space-inside": "never",
+		"selector-attribute-operator-space-after": "never",
+		"selector-attribute-operator-space-before": "never",
+		"declaration-block-no-duplicate-custom-properties": true,
+		"alpha-value-notation": [
+			"number"
+		],
+		"at-rule-empty-line-before": [
+			"always",
+			{
+				"except": ["blockless-after-same-name-blockless", "first-nested"],
+				"ignore": ["after-comment"],
+				"ignoreAtRules": [
+					"content",
+					"if",
+					"else",
+					"debug"
+				]
+			}
+		],
+		"at-rule-no-vendor-prefix": true,
+		"color-function-notation": "legacy",
+		"color-hex-length": "short",
+		"color-named": "never",
+		"comment-empty-line-before": [
+			"always",
+			{
+				"except": ["first-nested"],
+				"ignore": ["stylelint-commands"]
+			}
+		],
+		"comment-whitespace-inside": "never",
+		"custom-property-empty-line-before": [
+			"always",
+			{
+				"except": [
+					"after-custom-property",
+					"first-nested"
+				],
+				"ignore": [
+					"after-comment",
+					"inside-single-line-block"]
+			}
+		],
+		"custom-media-pattern": [
+			"[a-z0-9_-]+",
+			{
+				"message": "(name) => `Expected custom media query name to be kebab-case`"
+			}
+		],
+		"custom-property-pattern": [
+			"[a-z0-9_-]+",
+			{
+				"message": "(name) => `Expected custom property name  to be kebab-case`"
+			}
+		],
+		"declaration-empty-line-before": [
+			"always",
+			{
+				"except": ["after-declaration", "first-nested"],
+				"ignore": ["after-comment", "inside-single-line-block"]
+			}
+		],
+		"font-family-name-quotes": "always-unless-keyword",
+		"function-name-case": "lower",
+		"function-url-quotes": "always",
+		"hue-degree-notation": "angle",
+		"import-notation": "string",
+		"function-whitespace-after": "always",
+		"function-parentheses-newline-inside": "always-multi-line",
+		"function-parentheses-space-inside": "never-single-line",
+		"function-url-no-scheme-relative": true,
+		"keyframe-selector-notation": "percentage-unless-within-keyword-only-block",
+		"media-feature-range-operator-space-after": "always",
+		"media-feature-range-operator-space-before": "always",
+		"selector-pseudo-element-case": "lower",
+		"scss/dollar-variable-colon-newline-after": "always-multi-line",
+		"media-query-list-comma-newline-after": "always-multi-line",
+		"media-query-list-comma-newline-before": "never-multi-line",
+		"media-query-list-comma-space-after": "always-single-line",
+		"media-query-list-comma-space-before": "never",
+		"keyframes-name-pattern": [
+			"[a-z0-9_-]+",
+			{
+				"message": "(name) => `Expected keyframes name  to be kebab-case`"
+			}
+		],
+		"length-zero-no-unit": [
+			true,
+			{
+				"ignore": ["custom-properties"]
+			}
+		],
+		"media-feature-name-no-vendor-prefix": true,
+		"media-feature-range-notation": "context",
+		"rule-empty-line-before": [
+			"always-multi-line",
+			{
+				"except": ["first-nested"],
+				"ignore": ["after-comment"]
+			}
+		],
+		"property-case": "lower",
+		"at-rule-name-case": "lower",
+		"at-rule-name-space-after": "always-single-line",
+		"at-rule-semicolon-newline-after": "always",
+		"string-quotes": "double",
+		"at-rule-semicolon-space-before": "never",
+		"selector-max-empty-lines": 0,
+		"selector-max-id": 1,
+		"selector-attribute-quotes": "always",
+		"selector-combinator-space-after": "always",
+		"selector-pseudo-class-case": "lower",
+		"selector-combinator-space-before": "always",
+		"selector-list-comma-newline-after": "always",
+		"selector-list-comma-newline-before": "never-multi-line",
+		"selector-list-comma-space-after": "always-single-line",
+		"selector-list-comma-space-before": "never",
+		"block-closing-brace-empty-line-before": "never",
+		"block-closing-brace-newline-before": "always-multi-line",
+		"block-closing-brace-space-after": "always-single-line",
+		"block-closing-brace-space-before": "always-single-line",
+		"unit-case": "lower",
+		"block-closing-brace-newline-after": [
+			"always",
+			{
+				"ignoreAtRules": [
+					"if",
+					"else"
+				]
+			}
+		],
+		"selector-class-pattern": [
+			"[a-z0-9_-]+",
+			{
+				"message": "(name) => `Expected class selector name  to be kebab-case`"
+			}
+		],
+		"selector-id-pattern": [
+			"[a-z0-9_-]+",
+			{
+				"message": "(name) => `Expected id selector name  to be kebab-case`"
+			}
+		],
+		"selector-pseudo-element-colon-notation": "double",
+		"selector-type-case": "lower",
+		"shorthand-property-no-redundant-values": true,
+		"value-keyword-case": "lower",
+		"value-list-comma-newline-after": "always-multi-line",
+		"value-list-comma-newline-before": "never-multi-line",
+		"value-list-comma-space-after": "always",
+		"value-list-comma-space-before": "never",
+		"value-list-max-empty-lines": 0,
+		"value-no-vendor-prefix": [
+			true,
+			{
+				"ignoreValues": ["box", "inline-box"]
+			}
+		]
+  }
+}
