@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 @mixin empty-rombus($size:100px, $line: 10px) {
+	display: inline-block;
 	width: $size;
 	height: $size;
-	display: inline-block;
 	clip-path:
 		polygon(
 			0 50%,

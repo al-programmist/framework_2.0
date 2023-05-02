@@ -1,17 +1,76 @@
 {
 	"customSyntax": "postcss-scss",
 	"plugins": [
-		"stylelint-scss"
+		"stylelint-scss",
+		"stylelint-order"
 	],
   "rules": {
+		"order/order": [
+			"custom-properties",
+			"dollar-variables",
+			"declarations",
+			{
+				"type": "at-rule",
+				"name": "include",
+				"hasBlock": false
+			},
+			{
+				"type": "at-rule",
+				"name": "include",
+				"hasBlock": true
+			}
+		],
+		"order/properties-order": [
+			"position",
+			"z-index",
+			"top",
+			"bottom",
+			"left",
+			"right",
+			"margin",
+			"margin-top",
+			"margin-bottom",
+			"margin-left",
+			"margin-right",
+			"padding",
+			"padding-top",
+			"padding-bottom",
+			"padding-left",
+			"padding-right",
+			"display",
+			"max-width",
+			"max-height",
+			"min-width",
+			"min-height",
+			"width",
+			"height",
+			"aspect-ratio",
+			"box-sizing",
+			"font-family",
+			"font-size",
+			"font-style",
+			"line-height",
+			"color",
+			"letter-spacing",
+			"text-align",
+			"text-decoration",
+			"background",
+			"background-color",
+			"background-image",
+			"background-size",
+			"background-position",
+			"background-repeat",
+			"overflow",
+			"visibility",
+			"transform",
+			"transition",
+			"animation"
+		],
 
 		"declaration-block-trailing-semicolon": "always",
 		"declaration-colon-space-after": "always-single-line",
 		"declaration-colon-newline-after": "always-multi-line",
 		"declaration-colon-space-before": "never",
-		"scss/at-else-closing-brace-newline-after": "always-last-in-chain",
-		"scss/at-else-closing-brace-space-after": "always-intermediate",
-		"scss/at-else-empty-line-before": "never",
 		"scss/at-else-if-parentheses-space-before": "always",
 		"scss/at-function-parentheses-space-before": "never",
 		"scss/at-function-pattern": [
@@ -20,8 +79,6 @@
 				"message": "Expected function name to be kebab-case"
 			}
 		],
-		"scss/at-if-closing-brace-newline-after": "always-last-in-chain",
-		"scss/at-if-closing-brace-space-after": "always-intermediate",
 		"scss/at-mixin-argumentless-call-parentheses": "never",
 		"scss/at-mixin-parentheses-space-before": "never",
 		"scss/at-mixin-pattern": [
