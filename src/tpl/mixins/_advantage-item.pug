@@ -1,0 +1,4 @@
+mixin advantage-item(icon, description)
+  .advantages-list__item.advantage.col-md-4
+    +svg(`${icon.classname}`, `${icon.id}`)
+    span.advantage__text #{description}

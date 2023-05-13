@@ -8,7 +8,7 @@
   "doctype-html5": true,
   "doctype-first": true,
   "id-class-ad-disabled": true,
-  "empty-tag-not-self-closed": true,
+  "empty-tag-not-self-closed": false,
   "head-script-disabled": true,
   "id-unique": true,
   "inline-script-disabled": true,
