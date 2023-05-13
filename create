@@ -1,0 +1,23 @@
+#!/bin/bash
+blocks=src/blocks
+
+echo "Создаем компонент: " $1
+echo "Создаем каталог $blocks"$1
+cd $blocks
+mkdir $1
+cd $1/
+
+echo "Создаем файл $1.pug"
+echo "Создаем файл $1.scss"
+echo "Создаем файл $1.js"
+
+touch _$1.scss _$1.js _$1.pug
+
+cd ..
+
+echo "Регистрируем блоки..."
+echo "include $1/_$1.pug" >> index.pug
+echo "@import \"$1/_$1\";" >> index.scss
+echo "//= $1/_$1.js" >> index.js
+
+echo "Готово!"

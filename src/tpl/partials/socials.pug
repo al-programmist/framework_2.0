@@ -1,0 +1,59 @@
+-
+  var socialList = [
+    {
+      href: 'https://fb.com',
+
+      attr: {
+        classname: 'facebook',
+        title: 'facebook'
+      },
+
+      icon: {
+        classname: 'fb-icon',
+        id: 'fb'
+      }
+    },
+    {
+      href: 'https://twitter.com',
+
+      attr: {
+        classname: 'twitter',
+        title: 'twitter'
+      },
+
+      icon: {
+        classname: 'twitter-icon',
+        id: 'twitter'
+      }
+    },
+    {
+      href: 'https://instagram.com',
+
+      attr: {
+        classname: 'instagram',
+        title: 'instagram'
+      },
+
+      icon: {
+        classname: 'instagram-icon',
+        id: 'instagram'
+      }
+    },
+    {
+      href: 'https://youtube.com',
+
+      attr: {
+        classname: 'youtube',
+        title: 'youtube'
+      },
+
+      icon: {
+        classname: 'youtube-icon',
+        id: 'youtube'
+      }
+    }
+  ]
+
+.socials__list.social-list.row
+  each social in socialList
+    +social-icon(social.href, {classname: `${social.attr.classname}`, title: `${social.attr.title}`}, {classname: `${social.icon.classname}`, id: `${social.icon.id}`})

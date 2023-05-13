@@ -59,8 +59,8 @@ const path = {
 
   src: {
     html: [srcPath + "pages/*.pug", srcPath + "*.pug",],
-    css: srcPath + "scss/*.scss",
-    js: srcPath + "js/*.js",
+    css: [srcPath + "scss/*.scss", '!' + srcPath + "scss/_*.scss"],
+    js: [srcPath + "js/*.js", '!' + srcPath + "js/_*.scss"],
     images: srcPath + "images/**/*",
     icons: srcPath + "icon/**/*",
     svg: srcPath + "icon/**/*.svg",
@@ -72,8 +72,8 @@ const path = {
 
   watch: {
     html: srcPath + "**/*.pug",
-    css: srcPath + "scss/**/*.scss",
-    js: srcPath + "js/**/*.js",
+    css: [srcPath + "scss/**/*.scss", srcPath + "blocks/**/*.scss"],
+    js: [srcPath + "js/**/*.js", srcPath + "blocks/**/*.js"],
     images: srcPath + "images/**/*",
     icons: srcPath + "icon/**/*",
     svg: srcPath + "icon/**/*",
@@ -174,10 +174,10 @@ const font = gulp.parallel(
   woff2,
 );
 
-const lookup = () => {
+export const lookup = () => {
   gulp.watch([path.watch.html], {usePolling: true}, html);
-  gulp.watch([path.watch.css], {usePolling: true}, css);
-  gulp.watch([path.watch.js], {usePolling: true}, js);
+  gulp.watch(path.watch.css, {usePolling: true}, css);
+  gulp.watch(path.watch.js, {usePolling: true}, js);
   gulp.watch([path.watch.images], images);
   gulp.watch([path.watch.icons], icons);
   gulp.watch([path.watch.svg], sprites);
@@ -306,7 +306,7 @@ export const css = () => {
       suffix: ".min",
       extname: ".css"
     }))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(dest(path.build.css))
     .pipe(browserSync.stream())
 }
@@ -537,6 +537,7 @@ export default gulp.series(
   build,
   gulp.parallel(
     serve,
+    css,
     lookup
   )
 );

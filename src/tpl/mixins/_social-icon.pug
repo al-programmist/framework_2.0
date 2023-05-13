@@ -1,0 +1,5 @@
+mixin social-icon(href, attr, icon)
+  .social-list__item.social
+    a.social__link(class=`${attr.classname}` href= href title= `${attr.title}`)
+      span.visually-hidden #{attr.title}
+      +svg(`${icon.classname}`, `${icon.id}`)
