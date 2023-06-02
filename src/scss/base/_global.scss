@@ -457,12 +457,12 @@ a:visited {
 	background-size: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
-	overflow: hidden;
+
 
 	a {
 		display: block;
-		width: 0;
-		height: 0;
+		width: 100px;
+		height: 30px;
 
 		&::after {
 			position: absolute;
@@ -477,6 +477,12 @@ a:visited {
 			background-color: $transparent-color;
 		}
 	}
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 a:not([href]):not([tabindex]),
@@ -618,9 +624,10 @@ section {
 	margin-top: 0;
 	margin-bottom: 10px;
 	font-size: $h2-fz;
-	font-weight: 400;
+	font-weight: $h2-fw;
 	line-height: 1.4;
 	letter-spacing: 0;
+  color: $h2-color;
 }
 
 picture {

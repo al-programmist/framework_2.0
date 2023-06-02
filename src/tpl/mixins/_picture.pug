@@ -1,0 +1,17 @@
+-
+  var resolutions = [
+    '1400px',
+    '1200px',
+    '992px',
+    '768px',
+    '576px',
+    '200px'
+  ]
+
+mixin image(path, filename, extention, title, alt)
+  picture
+    each resolution in resolutions
+      source(media=`(min-width: ${resolution})`, srcset=`${path}${filename}-${resolution}.webp`)
+      source(media=`(min-width: ${resolution})`, srcset=`${path}${filename}-${resolution}.${extention}`)
+    source(srcset=`${path}${filename}-original.webp`)
+    img(src=`${path}${filename}-original.${extention}` title=`${title}` alt=`${alt}`)
