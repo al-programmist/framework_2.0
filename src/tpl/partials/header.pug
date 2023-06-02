@@ -1,2 +1,55 @@
+-
+  var nav = [
+    {
+      href: '/',
+      name: 'Skillbox',
+      grid: 'col',
+      attr: {
+        classname: 'nav__link brand-logo',
+        title: 'Лого компании'
+      }
+    },
+    {
+      href: '/',
+      name: 'Главная',
+      grid: 'col',
+      attr: {
+        classname: 'nav__link',
+        title: 'Главная'
+      }
+    },
+    {
+      href: '#about',
+      name: 'О нас',
+      grid: 'col',
+      attr: {
+        classname: 'nav__link',
+        title: 'О нас'
+      }
+    },
+    {
+      href: '#trainers',
+      name: 'Преподаватели',
+      grid: 'col',
+      attr: {
+        classname: 'nav__link',
+        title: 'Преподаватели'
+      }
+    },
+    {
+      href: '#courses',
+      name: 'Курсы',
+      grid: 'col',
+      attr: {
+        classname: 'nav__link',
+        title: 'Курсы'
+      }
+    },
+  ]
+
 header.header
+  nav.nav.header__nav
+    .container
+      +navList(true, 'header-nav', nav)
+
 
