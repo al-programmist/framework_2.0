@@ -273,3 +273,27 @@ export const js = () => {
           .pipe(dest(__path.build.js))
           .pipe(browserSync.stream())
 }
+
+export const build = gulp.series(
+        clean,
+        htaccess,
+        favicon,
+        font,
+        images,
+        gulp.parallel(
+                html,
+                css,
+                js,
+                icons,
+                sprites
+        )
+);
+
+export default gulp.series(
+        build,
+        gulp.parallel(
+                serve,
+                css,
+                lookup
+        )
+);
