@@ -1,0 +1,15 @@
+mixin navList(isRow, classname, list)
+  if isRow
+    ul(class = `nav__list ${classname} row`)
+      each item in list
+        li(class=`nav__item ${item.grid}`)
+          if item.name == 'Skillbox'
+            a(class!= `${item.attr.classname}` href!= `${item.href}` title!= `${item.attr.title}`)
+              +svg('logo-icon', 'logo')
+          else
+            a(class!= `${item.attr.classname}` href!= `${item.href}` title!= `${item.attr.title}`)!= item.name
+  else
+    ul(class = `nav__list ${classname}`)
+      each item in list
+        li(class=`nav__item ${item.grid}`)
+          a(class!= `${item.attr.classname}` href!= `${item.href}` title!= `${item.attr.title}`)!= item.name

@@ -1,0 +1,25 @@
+$button-default-color: #ddd;
+$button-text-fz: 18px;
+$button-text-fw: 700;
+$pt: 24px;
+$pb: 24px;
+$pl: 75px;
+$pr: 75px;
+$br: 20px;
+
+.button {
+  padding-top: $pt;
+  padding-bottom: $pb;
+  padding-left: $pl;
+  padding-right: $pr;
+  display: inline-block;
+  font-size: $button-text-fz;
+  font-weight: $button-text-fw;
+  color: $button-default-color;
+  border: 1px solid $button-default-color;
+  background-color: $transparent-color;
+
+  &--rounded {
+    border-radius: $br;
+  }
+}
