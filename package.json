@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "gulp",
+    "htmllint": "gulp htmllint",
     "stylelint": "stylelint src/scss/**/*.scss --quiet-deprecation-warnings"
   },
   "devDependencies": {
@@ -23,7 +24,6 @@
     "gulp-htmlhint": "^4.0.2",
     "gulp-image": "^6.3.1",
     "gulp-notify": "^4.0.0",
-    "gulp-picture": "^0.1.2",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.1",
     "gulp-pug": "^5.0.0",

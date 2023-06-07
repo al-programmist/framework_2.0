@@ -1,9 +1,0 @@
-mixin card(name, description, grid, link, img)
-  li(class=`cards__item card ${grid}`)
-    a.card__link(href!= link.href title!= link.title)
-      .card__inner
-        .card__image.picture
-          +image(img.folder, img.filename, img.extension, img.title, img.alt)
-        .card__text
-          h3.card__name #{name}
-          p.card__description #{description}

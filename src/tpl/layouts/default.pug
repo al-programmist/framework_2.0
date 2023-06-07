@@ -41,7 +41,7 @@ block variables
     msapplicationSquare150x150logo: null,
     msapplicationSquare310x310logo: null,
     msapplicationWide310x150logo: null,
-    msapplicationConfig: "/favicon/browserconfig.xml",
+    msapplicationConfig: "favicon/browserconfig.xml",
     viewport: 'width=device-width',
     XUACompatible: 'IE=edge'
     }
@@ -49,19 +49,19 @@ block variables
     var link = {
     appleTouchIcon: null,
     appleTouchIcon40x40: null,
-    appleTouchIcon57x57: '/favicon/apple-touch-icon-57x57.png',
+    appleTouchIcon57x57: 'favicon/apple-touch-icon-57x57.png',
     appleTouchIcon58x58: null,
-    appleTouchIcon60x60: "/favicon/apple-touch-icon-60x60.png",
-    appleTouchIcon72x72: "/favicon/apple-touch-icon-72x72.png",
-    appleTouchIcon76x76: "/favicon/apple-touch-icon-76x76.png",
+    appleTouchIcon60x60: "favicon/apple-touch-icon-60x60.png",
+    appleTouchIcon72x72: "favicon/apple-touch-icon-72x72.png",
+    appleTouchIcon76x76: "favicon/apple-touch-icon-76x76.png",
     appleTouchIcon80x80: null,
     appleTouchIcon87x87: null,
-    appleTouchIcon114x114: "/favicon/apple-touch-icon-114x114.png",
-    appleTouchIcon120x120: "/favicon/apple-touch-icon-120x120.png",
-    appleTouchIcon144x144: "/favicon/apple-touch-icon-144x144.png",
-    appleTouchIcon152x152: "/favicon/apple-touch-icon-152x152.png",
+    appleTouchIcon114x114: "favicon/apple-touch-icon-114x114.png",
+    appleTouchIcon120x120: "favicon/apple-touch-icon-120x120.png",
+    appleTouchIcon144x144: "favicon/apple-touch-icon-144x144.png",
+    appleTouchIcon152x152: "favicon/apple-touch-icon-152x152.png",
     appleTouchIcon167x167: null,
-    appleTouchIcon180x180: "/favicon/apple-touch-icon-180x180.png",
+    appleTouchIcon180x180: "favicon/apple-touch-icon-180x180.png",
     appleTouchIcon1024x1024: null,
     appleTouchIconPrecomposed: null,
     appleTouchIconPrecomposed40x40: null,
@@ -79,20 +79,20 @@ block variables
     appleTouchIconPrecomposed167x167: null,
     appleTouchIconPrecomposed180x180: null,
     appleTouchIconPrecomposed1024x1024: null,
-    icon: "/favicon/favicon-32x32.png",
-    icon16x16: "/favicon/favicon-16x16.png",
+    icon: "favicon/favicon-32x32.png",
+    icon16x16: "favicon/favicon-16x16.png",
     icon24x24: null,
-    icon32x32: "/favicon/favicon-32x32.png",
+    icon32x32: "favicon/favicon-32x32.png",
     icon64x64: null,
     icon48x48: null,
     icon96x96: null,
     icon128x128: null,
-    icon192x192: "/favicon/android-chrome-192x192.png",
-    icon194x194: "/favicon/favicon-194x194.png",
+    icon192x192: "favicon/android-chrome-192x192.png",
+    icon194x194: "favicon/favicon-194x194.png",
     icon196x196: null,
     icon256x256: null,
     icon512x512: null,
-    manifest: "/favicon/site.webmanifest",
+    manifest: "favicon/site.webmanifest",
     maskIcon: {
     href: null,
     color: null
@@ -238,7 +238,7 @@ html(class=html.classList)&attributes(html.attrs)
         link(href!=link.maskIcon.href rel="mask-icon" color=link.maskIcon.color)
 
     block styles
-      link(href!=`/css/main.min.css?v=${Date.now()}` rel="stylesheet")
+      link(href!=`css/main.min.css?v=${Date.now()}` rel="stylesheet")
     block head-end
       title #{title}
 
@@ -250,6 +250,6 @@ html(class=html.classList)&attributes(html.attrs)
       block footer
         include ../partials/footer
       block scripts
-        script(src!=`/js/main.min.js?v=${Date.now()}`)
+        script(src!=`js/main.min.js?v=${Date.now()}`)
     block body-end
       include modals
