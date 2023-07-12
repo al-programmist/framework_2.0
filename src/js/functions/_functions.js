@@ -1,38 +1,82 @@
-/*"use strict";
+"use strict";
 
-// Найти максимальное значение в массиве:
-/*Math.max(...array);*/
+/**
+ * Найти максимальное значение в массиве
+ * @param array
+ * @returns {number}
+ */
+const maxInArray = array => Math.max(array);
 
-// Найти минимальное значение в массиве:
-// Math.min(...array);
+/**
+ * Найти минимальное значение в массиве
+ * @param array
+ * @returns {number}
+ */
+const minInArray = array => Math.min(array);
 
-// Сгенерировать случайное число от 1 до 100:
-// Math.floor(Math.random() * 100) + 1;
+/**
+ * Сгенерировать случайное число от 1 до number:
+ * @param number
+ * @returns {number}
+ */
+const randomInRange = number => Math.floor(Math.random() * number) + 1;
 
-// Проверить, является ли строка валидным числом:
-/*!isNaN(parseFloat(string))
+/**
+ * Проверить, является ли строка валидным числом:
+ * @param string
+ * @returns {boolean}
+ */
+const isValidNumber = (string) => !isNaN(parseFloat(string));
 
-//Получить текущую дату и время:
-new Date().toString()
+/**
+ * Получить текущую дату и время:
+ */
+const currentDateTime = () => new Date().toString();
 
-// Проверить, является ли переменная массивом:
-Array.isArray(variable)
+/**
+ * Проверить, является ли переменная массивом:
+ * @param variable
+ * @returns {arg is any[]}
+ */
+const isArray = variable => Array.isArray(variable);
 
-//Проверить, является ли переменная объектом:
-typeof variable === "object"
+/**
+ * Проверить, является ли переменная объектом:
+ * @param variable
+ * @returns {boolean}
+ */
+const isObject = variable => typeof variable === "object";
 
-// Преобразовать массив в строку:
-array.join(",")
+/**
+ * Преобразовать массив в строку:
+ * @param array
+ * @returns {*}
+ */
+const join = array => array.join(",");
 
-// Проверить, является ли переменная функцией:
-typeof variable === "function"
+/**
+ * Проверить, является ли переменная функцией:
+ * @param variable
+ * @returns {boolean}
+ */
+const isFunction = variable => typeof variable === "function";
 
-// Преобразовать объект в массив:
-Object.values(object)
+/**
+ *  Преобразовать объект в массив:
+ * @param object
+ * @returns {unknown[]}
+ */
+const objectIntoArray = object => Object.values(object);
 
-// Посчитать вхождения элемента в массиве:
-array.filter(x => x === element).length
+/**
+ * Посчитать вхождения элемента в массиве:
+ * @param element
+ * @param array
+ * @returns {*}
+ */
+const countEqualInArray = (element, array) => array.filter(x => x === element).length;
 
+/*
 //Создать новый объект с динамическим ключом и значением:
 { [key]: value }
 
