@@ -1,7 +1,8 @@
-export function reloader(buildPath) {
-  return {
+import {$path} from "./path.js";
+
+const reloader = {
     server: {
-      baseDir: buildPath
+      baseDir: $path.buildPath
     },
     notify: false,
     open: true,
@@ -10,5 +11,6 @@ export function reloader(buildPath) {
     host: "localhost",
     port: 8000,
     logPrefix: "Terminator v.3.0"
-  }
 }
+
+export {reloader}

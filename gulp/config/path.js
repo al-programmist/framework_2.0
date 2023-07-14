@@ -1,8 +1,7 @@
-export function path() {
-  const buildPath = 'build/';
-  const srcPath = 'src/';
+const buildPath = 'build/';
+const srcPath = 'src/';
 
-  return {
+const $path = {
     srcPath: srcPath,
     buildPath: buildPath,
     faviconDataFile: srcPath + "favicon.json",
@@ -43,5 +42,6 @@ export function path() {
       fonts: srcPath + "fonts/**/*",
       htaccess: srcPath + ".htaccess",
     }
-  }
 }
+
+export {$path}

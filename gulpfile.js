@@ -1,14 +1,14 @@
 "use strict";
 
 import gulp from 'gulp';
-import {path} from "./gulp/config/path.js";
+import {$path} from "./gulp/config/path.js";
 import {breakpoints} from "./gulp/config/breakpoints.js";
 import {reloader} from "./gulp/config/reloader.js";
 import {faviconConfig} from "./gulp/config/favicon-config.js";
 import {imagesConfig} from "./gulp/config/images-config.js";
 import {spriteConfig} from "./gulp/config/sprite-config.js";
 import browserSync from "browser-sync";
-import {deleteAsync} from "del";
+import {deleteSync} from "del";
 import ttf2woff from "gulp-ttf2woff";
 import ttf2woff2 from "gulp-ttf2woff2";
 import realFavicon from "gulp-real-favicon";
@@ -39,79 +39,107 @@ import {dirname} from "path";
 import rigger from "gulp-rigger";
 import uglify from "gulp-uglify";
 
-
 const {src, dest} = gulp;
 const sass = gulpSass(dartSass);
-const __path = path();
-const __breakpoints = breakpoints();
-const __reloader = reloader(__path.buildPath);
-const __faviconConfig = faviconConfig();
-const __imagesConfig = imagesConfig();
-const __spriteConfig = spriteConfig();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export const config = (callback) => {
-  console.log(__path);
-  console.log(__breakpoints);
-  console.log(__reloader);
-  console.log(__faviconConfig);
-  console.log(__spriteConfig);
-  callback();
+	console.log($path);
+	console.log(breakpoints);
+	console.log(reloader);
+	console.log(faviconConfig);
+	console.log(spriteConfig);
+	callback();
 }
 
 /*Tasks*/
-
+/**
+ * Копирует htaccess
+ * @returns {*}
+ */
 const htaccess = () => {
-  return src(__path.src.htaccess, {base: __path.srcPath + "/"})
-          .pipe(dest(__path.build.htaccess))
-  // .pipe(browserSync.stream())
+	return src($path.src.htaccess, {base: $path.srcPath + "/"})
+					.pipe(dest($path.build.htaccess))
 }
 
+/**
+ * Копирует фавиконки
+ * @returns {*}
+ */
 const favicon = () => {
-  return src(__path.src.favcache + "/*", {base: __path.srcPath + "/favicon/generated/"})
-          .pipe(dest(__path.build.favicons))
-  // .pipe(browserSync.stream())
+	return src($path.src.favcache + "/*", {base: $path.srcPath + "/favicon/generated/"})
+					.pipe(dest($path.build.favicons))
 }
 
+/**
+ * Чистит целевую папку
+ * @param done
+ */
 const clean = (done) => {
-  deleteAsync([__path.clean]);
-  done();
+	deleteSync([$path.clean]);
+	done();
 }
 
+/**
+ * Создает пустую целевую папку, если ее нет
+ * @param done
+ */
+const setTarget = (done) => {
+	if(!fs.existsSync($path.clean)) {
+		fs.mkdirSync($path.clean);
+		console.log('📁  Каталог создан:', $path.clean);
+	}
+	done();
+}
+
+/**
+ * Запуск сервера
+ */
 const serve = () => {
-  browserSync.init(__reloader);
+	browserSync.init(reloader);
 }
 
+/**
+ * Конвертация ttf в woff
+ * @returns {*}
+ */
 const woff = () => {
-  return src(__path.src.fonts, {base: __path.srcPath + "/fonts/"})
-          .pipe(ttf2woff())
-          .pipe(dest(__path.build.fonts))
+	return src($path.src.fonts, {base: $path.srcPath + "/fonts/"})
+					.pipe(ttf2woff())
+					.pipe(dest($path.build.fonts))
 }
 
+/**
+ * Конвертация ttf в woff2
+ * @returns {*}
+ */
 const woff2 = () => {
-  return src(__path.src.fonts, {base: __path.srcPath + "/fonts/"})
-          .pipe(ttf2woff2())
-          .pipe(dest(__path.build.fonts))
+	return src($path.src.fonts, {base: $path.srcPath + "/fonts/"})
+					.pipe(ttf2woff2())
+					.pipe(dest($path.build.fonts))
 }
 
+/**
+ * Запуск конвертации всех шрифтов
+ */
 const font = gulp.parallel(
-        woff,
-        woff2,
+				woff,
+				woff2,
 );
 
 /**
  * Запускает слежение за выбранными каталогами
  */
 const lookup = () => {
-  gulp.watch([__path.watch.html], {usePolling: true}, html);
-  gulp.watch(__path.watch.css, {usePolling: true}, css);
-  gulp.watch(__path.watch.js, {usePolling: true}, js);
-  gulp.watch([__path.watch.images], images);
-  gulp.watch([__path.watch.icons], icons);
-  gulp.watch([__path.watch.svg], sprites);
-  gulp.watch([__path.watch.fonts], font);
-  gulp.watch([__path.watch.htaccess], {usePolling: true}, htaccess);
+	gulp.watch([$path.watch.html], {usePolling: true}, html);
+	gulp.watch($path.watch.css, {usePolling: true}, css);
+	gulp.watch($path.watch.js, {usePolling: true}, js);
+	gulp.watch([$path.watch.images], images);
+	gulp.watch([$path.watch.icons], icons);
+	gulp.watch([$path.watch.svg], sprites);
+	gulp.watch([$path.watch.fonts], font);
+	gulp.watch([$path.watch.htaccess], {usePolling: true}, htaccess);
 }
 
 /**
@@ -119,13 +147,13 @@ const lookup = () => {
  * @param done
  */
 export const favupdate = (done) => {
-  let currentVersion = JSON.parse(fs.readFileSync(__path.faviconDataFile)).version;
-  realFavicon.checkForUpdates(currentVersion, function (err) {
-    if (err) {
-      throw err;
-    }
-  });
-  done();
+	let currentVersion = JSON.parse(fs.readFileSync($path.faviconDataFile)).version;
+	realFavicon.checkForUpdates(currentVersion, function (err) {
+		if (err) {
+			throw err;
+		}
+	});
+	done();
 }
 
 /**
@@ -133,9 +161,9 @@ export const favupdate = (done) => {
  * @param done
  */
 export const favgenerate = (done) => {
-  realFavicon.generateFavicon(__faviconConfig, function () {
-    done();
-  });
+	realFavicon.generateFavicon(faviconConfig, function () {
+		done();
+	});
 }
 
 /**
@@ -143,13 +171,13 @@ export const favgenerate = (done) => {
  * @returns {*}
  */
 export const images = () => {
-  return src(__path.src.images, {base: __path.srcPath + "/images/"})
-          .pipe(responsive(__imagesConfig.breakpoints, __imagesConfig.settings))
-          .pipe(image(__imagesConfig.compression))
-          .pipe(dest(__path.build.images))
-          .pipe(webp())
-          .pipe(dest(__path.build.images))
-          .pipe(browserSync.stream())
+	return src($path.src.images, {base: $path.srcPath + "/images/"})
+					.pipe(responsive(imagesConfig.breakpoints, imagesConfig.settings))
+					.pipe(image(imagesConfig.compression))
+					.pipe(dest($path.build.images))
+					.pipe(webp())
+					.pipe(dest($path.build.images))
+					.pipe(browserSync.stream())
 }
 
 /**
@@ -157,12 +185,12 @@ export const images = () => {
  * @returns {*}
  */
 export const icons = () => {
-  return src(__path.src.icons, {base: __path.srcPath + "/icon/"})
-          .pipe(image(__imagesConfig.compression))
-          .pipe(dest(__path.build.icons))
-          .pipe(webp())
-          .pipe(dest(__path.build.icons))
-          .pipe(browserSync.stream())
+	return src($path.src.icons, {base: $path.srcPath + "/icon/"})
+					.pipe(image(imagesConfig.compression))
+					.pipe(dest($path.build.icons))
+					.pipe(webp())
+					.pipe(dest($path.build.icons))
+					.pipe(browserSync.stream())
 }
 
 /**
@@ -170,17 +198,17 @@ export const icons = () => {
  * @returns {*}
  */
 export const sprites = () => {
-  let config = spriteConfig();
+	let config = spriteConfig;
 
-  return src(__path.src.svg, {base: __path.srcPath + "/icon/"})
-          .pipe(plumber())
-          .pipe(svgSprite(config))
-          .on('error', notifier.onError({
-            message: "Error: <%= error.message %>",
-            title: "Spite creation error"
-          }))
-          .pipe(dest(__path.build.svg))
-          .pipe(browserSync.stream())
+	return src($path.src.svg, {base: $path.srcPath + "/icon/"})
+					.pipe(plumber())
+					.pipe(svgSprite(config))
+					.on('error', notifier.onError({
+						message: "Error: <%= error.message %>",
+						title: "Spite creation error"
+					}))
+					.pipe(dest($path.build.svg))
+					.pipe(browserSync.stream())
 }
 
 /**
@@ -188,13 +216,13 @@ export const sprites = () => {
  * @returns {*}
  */
 export const html = () => {
-  return src(__path.src.html, {base: __path.srcPath})
-          .pipe(sourcemaps.init())
-          .pipe(plumber())
-          .pipe(pug({pretty: true}))
-          .pipe(sourcemaps.write('.'))
-          .pipe(dest(__path.build.html))
-          .pipe(browserSync.stream())
+	return src($path.src.html, {base: $path.srcPath})
+					.pipe(sourcemaps.init())
+					.pipe(plumber())
+					.pipe(pug({pretty: true}))
+					.pipe(sourcemaps.write('.'))
+					.pipe(dest($path.build.html))
+					.pipe(browserSync.stream())
 }
 
 /**
@@ -202,17 +230,17 @@ export const html = () => {
  * @returns {*}
  */
 export const htmllint = () => {
-  return src(__path.src.html, {base: __path.srcPath})
-          .pipe(plumber())
-          .pipe(pugLinter({
-            reporter: pugLintStylish,
-          }))
-          .pipe(pug())
-          .pipe(htmlhint('.htmlhintrc'))
-          .pipe(reporter())
-          .pipe(htmlValidator.analyzer({ignoreLevel: 'info'}))
-          .pipe(htmlValidator.reporter())
-          .pipe(bemValidator())
+	return src($path.src.html, {base: $path.srcPath})
+					.pipe(plumber())
+					.pipe(pugLinter({
+						reporter: pugLintStylish,
+					}))
+					.pipe(pug())
+					.pipe(htmlhint('.htmlhintrc'))
+					.pipe(reporter())
+					.pipe(htmlValidator.analyzer({ignoreLevel: 'info'}))
+					.pipe(htmlValidator.reporter())
+					.pipe(bemValidator())
 }
 
 /**
@@ -220,38 +248,38 @@ export const htmllint = () => {
  * @returns {*}
  */
 export const css = () => {
-  return src(__path.src.css, {base: __path.srcPath + "/scss/"})
-          .pipe(sourcemaps.init())
-          .pipe(plumber())
-          .pipe(sass({
-            sourceMap: true,
-            errLogToConsole: true,
-            outputStyle: "expanded",
-            includePaths: [__dirname + "/node_modules"]
-          })
-                  .on('error', notifier.onError({
-                    message: "Error: <%= error.message %>",
-                    title: "Style Error"
-                  })))
-          .pipe(autoprefixer())
-          .pipe(cssBeautify({
-            autosemicolon: true
-          }))
-          .pipe(dest(__path.build.css))
-          .pipe(cssnano({
-            zIndex: false,
-            discardComments: {
-              removeAll: true
-            }
-          }))
-          .pipe(stripComments())
-          .pipe(rename({
-            suffix: ".min",
-            extname: ".css"
-          }))
-          .pipe(sourcemaps.write('.'))
-          .pipe(dest(__path.build.css))
-          .pipe(browserSync.stream())
+	return src($path.src.css, {base: $path.srcPath + "/scss/"})
+					.pipe(sourcemaps.init())
+					.pipe(plumber())
+					.pipe(sass({
+						sourceMap: true,
+						errLogToConsole: true,
+						outputStyle: "expanded",
+						includePaths: [__dirname + "/node_modules"]
+					})
+									.on('error', notifier.onError({
+										message: "Error: <%= error.message %>",
+										title: "Style Error"
+									})))
+					.pipe(autoprefixer())
+					.pipe(cssBeautify({
+						autosemicolon: true
+					}))
+					.pipe(dest($path.build.css))
+					.pipe(cssnano({
+						zIndex: false,
+						discardComments: {
+							removeAll: true
+						}
+					}))
+					.pipe(stripComments())
+					.pipe(rename({
+						suffix: ".min",
+						extname: ".css"
+					}))
+					.pipe(sourcemaps.write('.'))
+					.pipe(dest($path.build.css))
+					.pipe(browserSync.stream())
 }
 
 /**
@@ -259,41 +287,41 @@ export const css = () => {
  * @returns {*}
  */
 export const js = () => {
-  return src(__path.src.js, {base: __path.srcPath + "js/"})
-          .pipe(sourcemaps.init())
-          .pipe(plumber())
-          .pipe(rigger())
-          .pipe(dest(__path.build.js))
-          .pipe(uglify())
-          .pipe(rename({
-            suffix: ".min",
-            extname: ".js"
-          }))
-          .pipe(sourcemaps.write())
-          .pipe(dest(__path.build.js))
-          .pipe(browserSync.stream())
+	return src($path.src.js, {base: $path.srcPath + "js/"})
+					.pipe(sourcemaps.init())
+					.pipe(plumber())
+					.pipe(rigger())
+					.pipe(dest($path.build.js))
+					.pipe(uglify())
+					.pipe(rename({
+						suffix: ".min",
+						extname: ".js"
+					}))
+					.pipe(sourcemaps.write())
+					.pipe(dest($path.build.js))
+					.pipe(browserSync.stream())
 }
 
 export const build = gulp.series(
-        clean,
-        htaccess,
-        favicon,
-        font,
-        images,
-        gulp.parallel(
-                html,
-                css,
-                js,
-                icons,
-                sprites
-        )
+				clean,
+				setTarget,
+				font,
+				favicon,
+				icons,
+				sprites,
+				images,
+				htaccess,
+				gulp.parallel(
+								html,
+								css,
+								js,
+				)
 );
 
 export default gulp.series(
-        build,
-        gulp.parallel(
-                serve,
-                css,
-                lookup
-        )
+				build,
+				gulp.parallel(
+								serve,
+								lookup
+				)
 );

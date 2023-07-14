@@ -1,6 +1,6 @@
 "use strict"
 console.log('main script');
-//= components/index.js
 //= functions/index.js
+//= components/index.js
 //= ../blocks/index.js
 
