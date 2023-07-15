@@ -8,16 +8,14 @@ $pr: 75px;
 $br: 20px;
 
 .button {
-  padding-top: $pt;
-  padding-bottom: $pb;
-  padding-left: $pl;
-  padding-right: $pr;
-  display: inline-block;
+	padding: $pt $pr $pb $pl;
+	display: inline-block;
   font-size: $button-text-fz;
   font-weight: $button-text-fw;
   color: $button-default-color;
   border: 1px solid $button-default-color;
   background-color: $transparent-color;
+	cursor: pointer;
 
   &--rounded {
     border-radius: $br;

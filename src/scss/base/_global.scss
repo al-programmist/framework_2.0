@@ -14,6 +14,11 @@
 	background-color: $selection-color;
 }
 
+:root {
+	--index: calc(1vw + 1vh);
+	--transition: 1s cubic-bezier(.05, .5, 0, 1);
+}
+
 body {
 	margin: 0;
 	font-family: $site-default-font, $font-family-sans-serif;
@@ -458,7 +463,6 @@ a:visited {
 	background-position: center;
 	background-repeat: no-repeat;
 
-
 	a {
 		display: block;
 		width: 100px;
@@ -624,10 +628,10 @@ section {
 	margin-top: 0;
 	margin-bottom: 10px;
 	font-size: $h2-fz;
-	font-weight: $h2-fw;
 	line-height: 1.4;
-	letter-spacing: 0;
   color: $h2-color;
+	letter-spacing: 0;
+	font-weight: $h2-fw;
 }
 
 picture {

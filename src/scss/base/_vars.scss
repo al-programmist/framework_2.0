@@ -1,11 +1,11 @@
 $z-index-fixed: 100;
 $z-index-hidden: 999999999;
-$base-bg-color: #e5e5e5;
+$base-bg-color: #000;
 $kbd-bg-color: #999;
 $mark-bg-color: #999;
 $picture-bg-color: #eee;
 $link-color: #2413a1;
-$base-color: #666;
+$base-color: #fff;
 $selection-color: #888;
 $hr-color: #555;
 $transparent-color: rgba(255, 255, 255, 0);
@@ -13,7 +13,7 @@ $caption-color: #000;
 $code-color: #005;
 $kbd-color: #222;
 $pre-color: #222;
-$h2-color: #2E2B44;
+$h2-color: #2e2b44;
 $h1-fz: 60px;
 $h2-fz: 40px;
 $h2-fw: 700;
@@ -28,7 +28,7 @@ $base-code-fz: 16px;
 $base-lh: 1.5;
 $base-header-fw: 500;
 $base-header-lh: 1.2;
-$site-default-font: "Roboto";
+$site-default-font: "Kamerik-3d";
 $font-family-sans-serif:
 	"BlinkMacSystemFont",
 	"Segoe UI",
@@ -42,8 +42,8 @@ $font-family-sans-serif:
 	arial,
 	sans-serif;
 $padding-for-navigation: 0;
-$pt-section: 30px;
-$pb-section: 30px;
+$pt-section: 0;
+$pb-section: 0;
 $mb-p: 16px;
 $picture-bg-picture: "/icon/picture.svg";
 $picture-min-width: 320px;

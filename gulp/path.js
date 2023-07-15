@@ -4,7 +4,7 @@ const srcPath = 'src/';
 const $path = {
     srcPath: srcPath,
     buildPath: buildPath,
-    faviconDataFile: srcPath + "favicon.json",
+    faviconDataFile: srcPath + "favicon/favicon.json",
     clean: buildPath,
 
     build: {
@@ -14,22 +14,34 @@ const $path = {
       images: buildPath + "images/",
       icons: buildPath + "icon/",
       svg: buildPath,
+      png: {
+				files: buildPath,
+				css: srcPath + "scss/base/"
+			},
       favicons: buildPath + "favicon/",
       fonts: buildPath + "fonts/",
+			robots: buildPath,
       htaccess: buildPath,
     },
 
     src: {
       html: [srcPath + "pages/*.pug", srcPath + "*.pug",],
       css: [srcPath + "scss/*.scss", '!' + srcPath + "scss/_*.scss"],
-      js: [srcPath + "js/*.js", '!' + srcPath + "js/_*.scss"],
+      js: srcPath + "js/main.js",
       images: srcPath + "images/**/*",
       icons: srcPath + "icon/**/*",
       svg: srcPath + "icon/**/*.svg",
+      png: {
+				files: srcPath + "icon/**/*.png",
+				retinaSrcFilter: srcPath + 'icon/png/*@2x.png',
+				cssTemplate: srcPath + 'scss/base/_sprite.hbs',
+			},
       favicons: srcPath + "favicon/favicon-master.png",
       favcache: srcPath + "favicon/generated/",
       fonts: srcPath + "fonts/*",
-      htaccess: srcPath + ".htaccess",
+      htaccess: srcPath + "environment/.htaccess",
+			robots: srcPath + "environment/robots.txt",
+			share: srcPath + "environment/shareSettings.php",
     },
 
     watch: {
